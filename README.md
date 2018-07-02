@@ -8,7 +8,9 @@ Simple Bot using DNN (Tensorflow) and served using Django
 `pip install -r requirements.pip --no-index --find-links file:///tmp/packages`
 
 ##Training
+
 Expected responses to speech requests can be configured in **Intents.json** file present in the same root folder
+
 ##### Example
 ```json
 {
