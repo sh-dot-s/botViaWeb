@@ -1,0 +1,6 @@
+nltk
+numpy
+tensorflow
+tflearn
+django
+pickle
