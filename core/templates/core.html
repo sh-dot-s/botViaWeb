@@ -1,1 +1,82 @@
-{{result}}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MyAssister</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+</head>
+<script>
+    $(document).ready(() => {
+        console.log("Document Ready");
+        $("#sender").submit((e) => {
+            e.preventDefault();
+            jQuery.support.cors = true;
+            console.log();
+            $.ajax({
+                type: "GET",
+                url: '/speech/?speech="' + $('#s_t').val() + '"',
+                success: (data) => {
+                    $.each(data.result, (k, v) => {
+                        $('#r_t').text(v);
+                        $('.badge').text("#" + k);
+                        $('#s_t').text("");
+                    })
+                }
+            });
+        });
+    });
+</script>
+<style>
+    .h_v_c {
+        padding-top: 100px;
+    }
+</style>
+
+<body>
+    <div class="h_v_c container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card text-white">
+                    <form id="sender" method="GET">
+                        {% csrf_token %}
+                        <h5 class="card-header bg-info">
+                            Sender
+                        </h5>
+                        <div class="card-body bg-dark">
+                            <p class="card-text">
+                                <label for="text">Enter text below:</label>
+                                <input id="s_t" class="form-control" type="text"/>
+                            </p>
+                        </div>
+                        <div class="card-footer bg-primary">
+                            <button type="submit" class="btn btn-outline-dark">Send</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card text-white">
+                    <h5 class="card-header bg-danger">
+                        Receiver
+                    </h5>
+                    <div class="card-body bg-dark">
+                        <p id='r_t' class="card-text">
+                            Reciever content
+                        </p>
+                    </div>
+                    <div class="card-footer bg-secondary">
+                        <span class="badge badge-dark">#NoTag</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

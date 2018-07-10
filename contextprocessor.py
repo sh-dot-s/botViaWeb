@@ -13,7 +13,7 @@ documents = []
 ignore_words = ['?']
 
 import json
-with open('../intents.json','r') as json_data:
+with open('intents.json','r') as json_data:
     intents = json.load(json_data)
 
 for intent in intents['intents']:

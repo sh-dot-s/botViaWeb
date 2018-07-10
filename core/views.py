@@ -88,3 +88,6 @@ def giveresponse(request):
             return JsonResponse({"result":"Bad request"})
     else:
         return render_to_response("<h3>Only GET accepted!!</h3>")
+
+def home(request):
+    return render(request,"core.html")
